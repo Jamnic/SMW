@@ -27,6 +27,6 @@ class CharacterFactory(
     private fun createCharacter(): Character {
         return BaseCharacter(
                 SolidSprite(
-                        BaseSprite(ImageSize.THIN_16.size())))
+                        BaseSprite(ImageSize.THIN_16.size)))
     }
 }

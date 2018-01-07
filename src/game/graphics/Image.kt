@@ -22,9 +22,9 @@ open class Image(
 
     fun subimage(xPosition: Int, yPosition: Int, imageSize: ImageSize): Image {
         return Image(bufferedImage.getSubimage(
-                imageSize.width * xPosition,
-                imageSize.height * yPosition,
-                imageSize.width,
-                imageSize.height))
+                imageSize.size.width * xPosition,
+                imageSize.size.height * yPosition,
+                imageSize.size.width,
+                imageSize.size.height))
     }
 }

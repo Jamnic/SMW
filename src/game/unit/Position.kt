@@ -6,6 +6,20 @@ class Position(
 ) {
 
     constructor(
+            x: Double,
+            y: Int
+    ) : this(
+            x,
+            y.toDouble())
+
+    constructor(
+            x: Int,
+            y: Double
+    ) : this(
+            x.toDouble(),
+            y)
+
+    constructor(
             x: Int,
             y: Int
     ) : this(

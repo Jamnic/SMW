@@ -20,9 +20,9 @@ class BlockFactory(
                         6,
                         ImageSize.MEDIUM_16),
                 BaseBlock(
-                        size = ImageSize.MEDIUM_16.size(),
+                        size = ImageSize.MEDIUM_16.size,
                         spriteDelegate = ImmovableSprite(
                                 SolidSprite(
-                                        BaseSprite(ImageSize.MEDIUM_16.size())))))
+                                        BaseSprite(ImageSize.MEDIUM_16.size)))))
     }
 }

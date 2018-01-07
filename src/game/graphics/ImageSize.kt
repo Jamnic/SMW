@@ -3,16 +3,10 @@ package game.graphics
 import game.unit.Size
 
 enum class ImageSize(
-        val width: Int,
-        val height: Int
+        val size: Size
 ) {
-
-    UNKNOWN(1, 1),
-    MEDIUM_16(16, 16),
-    THIN_16(14, 16),
-    MEDIUM_32(32, 32);
-
-    fun size(): Size {
-        return Size(width, height)
-    }
+    UNKNOWN(Size(1, 1)),
+    MEDIUM_16(Size(16, 16)),
+    THIN_16(Size(14, 16)),
+    MEDIUM_32(Size(32, 32));
 }
