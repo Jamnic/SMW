@@ -7,7 +7,7 @@ import game.graphics.Image
 import game.time.Timer
 import game.unit.Direction
 import game.unit.force.MonoForce
-import game.unit.Value
+import game.unit.value.Value
 import java.awt.Dimension
 import javax.swing.JFrame
 
@@ -39,7 +39,7 @@ class GameWindow : JFrame() {
             world.putSprite(blockFactory.create(), WorldCoordinate(i, 10))
         }
 
-        character.addForce(MonoForce(Value.of(1.0), Direction.DOWN))
+        character.addForce(MonoForce(Value(1.0), Direction.DOWN))
 
         val panel = GamePanel(character, world, dimension)
         add(panel)

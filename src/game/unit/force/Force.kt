@@ -1,6 +1,6 @@
 package game.unit.force
 
-import game.unit.Value
+import game.unit.value.Value
 
 class Force(
         val x: Value,

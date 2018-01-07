@@ -1,7 +1,7 @@
 package game.unit.force
 
 import game.unit.Direction
-import game.unit.Value
+import game.unit.value.Value
 
 open class MonoForce(
         val value: Value,

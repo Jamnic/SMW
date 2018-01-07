@@ -1,8 +1,9 @@
 package game.unit.force
 
 import game.unit.Direction
-import game.unit.Value
+import game.unit.value.Value
 import game.unit.Velocity
+import game.unit.value.UnspecifiedValue
 
 class Forces(
         private val forces: MutableList<MonoForce> = mutableListOf()
@@ -27,6 +28,6 @@ class Forces(
     private fun sumForcesValue(direction: Direction): Value {
         return forces
                 .filter { it.direction == direction }
-                .fold(Value.unspecified(), { acc, value -> acc.plus(value.value) })
+                .fold(UnspecifiedValue() as Value, { acc, value -> acc.plus(value.value) })
     }
 }

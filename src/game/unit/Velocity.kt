@@ -1,10 +1,12 @@
 package game.unit
 
 import game.unit.force.Force
+import game.unit.value.UnspecifiedValue
+import game.unit.value.Value
 
 class Velocity(
-        private var x: Value = Value.unspecified(),
-        private var y: Value = Value.unspecified()
+        private var x: Value = UnspecifiedValue(),
+        private var y: Value = UnspecifiedValue()
 ) {
 
     fun x(): Value {
