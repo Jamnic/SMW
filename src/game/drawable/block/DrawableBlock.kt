@@ -8,6 +8,6 @@ import game.graphics.Image
 class DrawableBlock(
         image: Image,
         private val blockDelegate: Block,
-        private val drawableDelegate: Drawable = ImageSprite(image, blockDelegate.position())
+        private val drawableDelegate: Drawable = ImageSprite(image, blockDelegate.rect())
 ) : Block by blockDelegate,
         Drawable by drawableDelegate

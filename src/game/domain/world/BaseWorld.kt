@@ -13,7 +13,7 @@ class BaseWorld(
             coordinate: WorldCoordinate
     ) {
         sprites += character
-        character.position().update(coordinate.toPosition(blockSize))
+        character.rect().update(coordinate.toPosition(blockSize))
     }
 
     override fun sprites(): List<Sprite> {

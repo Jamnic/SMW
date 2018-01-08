@@ -1,7 +1,7 @@
 package game.unit
 
 class Rect(
-        private val size: Size,
+        private val size: Size = Size(),
         val position: Position = Position()
 ) {
 
@@ -47,5 +47,13 @@ class Rect(
 
     override fun toString(): String {
         return "$position - $size"
+    }
+
+    fun update(velocity: Velocity) {
+        this.position.update(velocity)
+    }
+
+    fun update(position: Position) {
+        this.position.update(position)
     }
 }

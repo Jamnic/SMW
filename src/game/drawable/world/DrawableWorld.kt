@@ -5,11 +5,12 @@ import game.drawable.Drawable
 import game.drawable.ImageSprite
 import game.graphics.GameGraphics
 import game.graphics.Image
+import game.unit.Rect
 
 class DrawableWorld(
         image: Image,
         private val worldDelegate: World,
-        private val drawableDelegate: Drawable = ImageSprite(image)
+        private val drawableDelegate: Drawable = ImageSprite(image, Rect())
 ) : World by worldDelegate,
         Drawable by drawableDelegate {
 

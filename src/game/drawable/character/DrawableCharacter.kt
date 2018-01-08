@@ -8,6 +8,6 @@ import game.graphics.Image
 class DrawableCharacter(
         image: Image,
         private val characterDelegate: Character,
-        private val drawableDelegate: Drawable = ImageSprite(image, characterDelegate.position())
+        private val drawableDelegate: Drawable = ImageSprite(image, characterDelegate.rect())
 ) : Character by characterDelegate,
         Drawable by drawableDelegate

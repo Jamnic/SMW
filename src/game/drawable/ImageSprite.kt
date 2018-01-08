@@ -2,14 +2,14 @@ package game.drawable
 
 import game.graphics.GameGraphics
 import game.graphics.Image
-import game.unit.Position
+import game.unit.Rect
 
 class ImageSprite(
         private val image: Image,
-        private val position: Position = Position()
+        private val rect: Rect
 ) : Drawable {
 
     override fun draw(graphics: GameGraphics) {
-        graphics.draw(image, position)
+        graphics.draw(image, rect)
     }
 }

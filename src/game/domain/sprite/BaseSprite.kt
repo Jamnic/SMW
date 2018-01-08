@@ -13,10 +13,6 @@ class BaseSprite(
     private val forces: Forces = Forces()
     private val rect: Rect = Rect(size)
 
-    override fun position(): Position {
-        return rect.position
-    }
-
     override fun addForce(force: MonoForce) {
         forces.plusAssign(force)
     }
@@ -36,6 +32,6 @@ class BaseSprite(
     }
 
     override fun tick() {
-        position().update(forces.calculateVelocity())
+        rect.update(forces.calculateVelocity())
     }
 }

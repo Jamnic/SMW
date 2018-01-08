@@ -1,17 +1,17 @@
 package game.graphics
 
-import game.unit.Position
+import game.unit.Rect
 import java.awt.Graphics
 
 class GameGraphics(
         private val graphics: Graphics
 ) {
 
-    fun draw(image: Image, position: Position) {
+    fun draw(image: Image, rect: Rect) {
         graphics.drawImage(
                 image.bufferedImage(),
-                position.x().toInt(),
-                position.y().toInt(),
+                rect.position.x().toInt(),
+                rect.position.y().toInt(),
                 null)
     }
 }
