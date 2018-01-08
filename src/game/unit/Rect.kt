@@ -5,100 +5,44 @@ class Rect(
         private val size: Size
 ) {
 
-    fun intersects(rect: Rect): Boolean {
-        val verticalIntersection = verticalIntersection(rect)
-        val horizontalIntersection = horizontalIntersection(rect)
-        return verticalIntersection && horizontalIntersection
-    }
+    fun intersects(rect: Rect) = verticalIntersection(rect) && horizontalIntersection(rect)
 
-    private fun verticalIntersection(rect: Rect): Boolean {
-        return upCollision(rect) || downCollision(rect)
-    }
+    private fun verticalIntersection(rect: Rect) = upCollision(rect) || downCollision(rect)
+    private fun horizontalIntersection(rect: Rect) = leftCollision(rect) || rightCollision(rect)
 
-    private fun horizontalIntersection(rect: Rect): Boolean {
-        return leftCollision(rect) || rightCollision(rect)
-    }
+    private fun upCollision(rect: Rect) = rect.upEdge() in this.upEdge()..this.downEdge()
+    private fun downCollision(rect: Rect) = rect.downEdge() in this.upEdge()..this.downEdge()
+    private fun leftCollision(rect: Rect) = rect.leftEdge() in this.leftEdge()..this.rightEdge()
+    private fun rightCollision(rect: Rect) = rect.rightEdge() in this.leftEdge()..this.rightEdge()
 
-    private fun rightCollision(rect: Rect): Boolean {
-        val rectRightSide = rect.position.x() + rect.size.width
+    private fun upEdge(): Double = position.y()
+    private fun downEdge(): Double = position.y() + size.height
+    private fun leftEdge(): Double = position.x()
+    private fun rightEdge(): Double = position.x() + size.width
 
-        val thisLeftSide = position.x()
-        val thisRightSide = thisLeftSide + size.width
+    private fun leftUpCorner(): Position = this.position
+    private fun leftDownCorner(): Position = this.position + Position(0.0, this.size.height)
+    private fun rightUpCorner(): Position = this.position + Position(this.size.width, 0.0)
+    private fun rightDownCorner(): Position = this.position + Position(this.size.width, this.size.height)
 
-        return rectRightSide in thisLeftSide..thisRightSide
-    }
+    private fun upCornerCollision(rect: Rect): Boolean = leftDownCorner().y() == rect.upEdge() || rightDownCorner().y() == rect.upEdge()
+    private fun downCornerCollision(rect: Rect): Boolean = leftUpCorner().y() == rect.downEdge() || rightUpCorner().y() == rect.downEdge()
 
-    private fun leftCollision(rect: Rect): Boolean {
-        val rectLeftSide = rect.position.x()
+    private fun rightCornerCollision(rect: Rect): Boolean = leftDownCorner().x() == rect.rightEdge() || leftUpCorner().x() == rect.rightEdge()
+    private fun leftCornerCollision(rect: Rect): Boolean = rightUpCorner().x() == rect.leftEdge() || rightDownCorner().x() == rect.leftEdge()
 
-        val thisLeftSide = position.x()
-        val thisRightSide = thisLeftSide + size.width
-
-        return rectLeftSide in thisLeftSide..thisRightSide
-    }
-
-    private fun upCollision(rect: Rect): Boolean {
-        val rectUpSide = rect.position.y()
-
-        val thisUpSide = position.y()
-        val thisDownSide = thisUpSide + size.height
-
-        return rectUpSide in thisUpSide..thisDownSide
-    }
-
-    private fun downCollision(rect: Rect): Boolean {
-        val rectDownSide = rect.position.y() + rect.size.height
-
-        val thisUpSide = position.y()
-        val thisDownSide = thisUpSide + size.height
-
-        return rectDownSide in thisUpSide..thisDownSide
-    }
-
-    fun corner(rect: Rect): Direction {
-        val upEdge = rect.position.y()
-        val downEdge = rect.position.y() + rect.size.height
-        val leftEdge = rect.position.x()
-        val rightEdge = rect.position.x() + rect.size.width
-
-        val leftTop = this.position
-        val leftBottom = this.position + Position(0.0, this.size.height)
-        val rightTop = this.position + Position(this.size.width, 0.0)
-        val rightBottom = this.position + Position(this.size.width, this.size.height)
-
-        if (rightBottom.x() == leftEdge && rightBottom.y() == upEdge) {
-            return Direction.NONE
-        } else if (rightBottom.x() == leftEdge) {
-            return Direction.RIGHT
-        } else if (rightBottom.y() == upEdge) {
-            return Direction.DOWN
+    fun cornerCollisionDirection(rect: Rect): Direction {
+        return when {
+            leftCornerCollision(rect) && upCornerCollision(rect) -> Direction.NONE
+            rightCornerCollision(rect) && upCornerCollision(rect) -> Direction.NONE
+            rightCornerCollision(rect) && downCornerCollision(rect) -> Direction.NONE
+            leftCornerCollision(rect) && downCornerCollision(rect) -> Direction.NONE
+            rightCornerCollision(rect) -> Direction.LEFT
+            leftCornerCollision(rect) -> Direction.RIGHT
+            upCornerCollision(rect) -> Direction.DOWN
+            downCollision(rect) -> Direction.UP
+            else -> Direction.NONE
         }
-
-        if (leftBottom.x() == rightEdge && leftBottom.y() == upEdge) {
-            return Direction.NONE
-        } else if (leftBottom.x() == rightEdge) {
-            return Direction.LEFT
-        } else if (leftBottom.y() == upEdge) {
-            return Direction.DOWN
-        }
-
-        if (leftTop.x() == rightEdge && leftTop.y() == downEdge) {
-            return Direction.NONE
-        } else if (leftTop.x() == rightEdge) {
-            return Direction.LEFT
-        } else if (leftTop.y() == downEdge) {
-            return Direction.UP
-        }
-
-        if (rightTop.x() == leftEdge && rightTop.y() == downEdge) {
-            return Direction.NONE
-        } else if (rightTop.x() == leftEdge) {
-            return Direction.RIGHT
-        } else if (rightTop.y() == downEdge) {
-            return Direction.UP
-        }
-
-        return Direction.UP
     }
 
     override fun toString(): String {

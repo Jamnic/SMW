@@ -3,7 +3,6 @@ package game.domain.block
 import game.domain.sprite.Sprite
 import game.unit.force.TemporaryMonoForce
 import game.unit.value.StopValue
-import game.unit.value.Value
 
 class SolidSprite(
         private val spriteDelegate: Sprite
@@ -19,7 +18,7 @@ class SolidSprite(
         spriteDelegate.collide(sprite)
 
         if (sprite is SolidSprite) {
-            val direction = this.rect().corner(sprite.rect())
+            val direction = this.rect().cornerCollisionDirection(sprite.rect())
             this.addForce(TemporaryMonoForce(StopValue(), direction))
         }
     }
