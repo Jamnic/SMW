@@ -1,8 +1,8 @@
 package game.unit
 
 class Rect(
-        private val position: Position,
-        private val size: Size
+        private val size: Size,
+        val position: Position = Position()
 ) {
 
     fun intersects(rect: Rect) = verticalIntersection(rect) && horizontalIntersection(rect)

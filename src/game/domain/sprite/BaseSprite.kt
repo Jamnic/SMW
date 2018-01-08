@@ -7,15 +7,14 @@ import game.unit.force.Forces
 import game.unit.force.MonoForce
 
 class BaseSprite(
-        size: Size,
-        private val position: Position = Position()
+        size: Size
 ) : Sprite {
 
     private val forces: Forces = Forces()
-    private val rect: Rect = Rect(position, size)
+    private val rect: Rect = Rect(size)
 
     override fun position(): Position {
-        return position
+        return rect.position
     }
 
     override fun addForce(force: MonoForce) {
@@ -37,6 +36,6 @@ class BaseSprite(
     }
 
     override fun tick() {
-        position.update(forces.calculateVelocity())
+        position().update(forces.calculateVelocity())
     }
 }
