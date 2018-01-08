@@ -10,8 +10,8 @@ class GameGraphics(
     fun draw(image: Image, rect: Rect) {
         graphics.drawImage(
                 image.bufferedImage(),
-                rect.position.x().toInt(),
-                rect.position.y().toInt(),
+                rect.position().x().toInt(),
+                rect.position().y().toInt(),
                 null)
     }
 }

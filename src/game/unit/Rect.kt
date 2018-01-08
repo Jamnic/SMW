@@ -2,8 +2,12 @@ package game.unit
 
 class Rect(
         private val size: Size = Size(),
-        val position: Position = Position()
+        private var position: Position = Position()
 ) {
+
+    fun position(): Position {
+        return position
+    }
 
     fun intersects(rect: Rect) = verticalIntersection(rect) && horizontalIntersection(rect)
 
@@ -50,10 +54,10 @@ class Rect(
     }
 
     fun update(velocity: Velocity) {
-        this.position.update(velocity)
+        this.position = position + velocity
     }
 
     fun update(position: Position) {
-        this.position.update(position)
+        this.position = position
     }
 }

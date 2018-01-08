@@ -1,30 +1,13 @@
 package game.unit
 
-class Position(
+data class Position(
         private var x: Double = 0.0,
         private var y: Double = 0.0
 ) {
 
-    constructor(
-            x: Double,
-            y: Int
-    ) : this(
-            x,
-            y.toDouble())
-
-    constructor(
-            x: Int,
-            y: Double
-    ) : this(
-            x.toDouble(),
-            y)
-
-    constructor(
-            x: Int,
-            y: Int
-    ) : this(
-            x.toDouble(),
-            y.toDouble())
+    constructor(x: Double, y: Int) : this(x, y.toDouble())
+    constructor(x: Int, y: Double) : this(x.toDouble(), y)
+    constructor(x: Int, y: Int) : this(x.toDouble(), y.toDouble())
 
     fun x(): Double {
         return x
@@ -34,20 +17,16 @@ class Position(
         return y
     }
 
-    fun update(position: Position) {
-        this.x = position.x
-        this.y = position.y
-    }
-
-    fun update(velocity: Velocity) {
-        this.x += velocity.x.evaluate()
-        this.y += velocity.y.evaluate()
-    }
-
     operator fun plus(position: Position): Position {
         return Position(
                 this.x + position.x,
                 this.y + position.y)
+    }
+
+    operator fun plus(velocity: Velocity): Position {
+        return Position(
+                velocity.x + this.x,
+                velocity.y + this.y)
     }
 
     override fun toString(): String {

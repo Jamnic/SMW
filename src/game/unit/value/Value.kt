@@ -33,4 +33,8 @@ open class Value(
     override fun toString(): String {
         return "$value"
     }
+
+    operator fun plus(value: Double): Double {
+        return this.evaluate() + value
+    }
 }
