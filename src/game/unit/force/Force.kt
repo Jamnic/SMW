@@ -1,5 +1,6 @@
 package game.unit.force
 
+import game.unit.Velocity
 import game.unit.value.Value
 
 class Force(
@@ -9,5 +10,9 @@ class Force(
 
     override fun toString(): String {
         return "[$x, $y]"
+    }
+
+    fun toVelocity(): Velocity {
+        return Velocity(x, y)
     }
 }

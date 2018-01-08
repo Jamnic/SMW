@@ -4,7 +4,6 @@ import game.domain.character.Character
 import game.drawable.world.DrawableWorld
 import game.graphics.GameGraphics
 import game.player.Keyboard
-import game.player.PlayerCharacter
 import java.awt.Dimension
 import java.awt.Graphics
 import javax.swing.JPanel

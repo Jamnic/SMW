@@ -1,25 +1,17 @@
 package game.unit
 
-import game.unit.force.Force
 import game.unit.value.UnspecifiedValue
 import game.unit.value.Value
 
-class Velocity(
-        private var x: Value = UnspecifiedValue(),
-        private var y: Value = UnspecifiedValue()
+data class Velocity(
+        val x: Value = UnspecifiedValue(),
+        val y: Value = UnspecifiedValue()
 ) {
 
-    fun x(): Value {
-        return x
-    }
-
-    fun y(): Value {
-        return y
-    }
-
-    fun update(force: Force) {
-        this.x = force.x
-        this.y = force.y
+    operator fun plus(velocity: Velocity): Velocity {
+        return Velocity(
+                this.x + velocity.x,
+                this.y + velocity.y)
     }
 
     override fun toString(): String {

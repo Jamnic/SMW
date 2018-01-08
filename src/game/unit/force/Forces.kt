@@ -1,9 +1,9 @@
 package game.unit.force
 
 import game.unit.Direction
-import game.unit.value.Value
 import game.unit.Velocity
 import game.unit.value.UnspecifiedValue
+import game.unit.value.Value
 
 class Forces(
         private val forces: MutableList<MonoForce> = mutableListOf()
@@ -13,11 +13,13 @@ class Forces(
         this.forces += force
     }
 
-    fun calculateVelocity(velocity: Velocity) {
-        velocity.update(Force(sumForces(Direction.LEFT, Direction.RIGHT),
-                sumForces(Direction.UP, Direction.DOWN)))
+    fun calculateVelocity() : Velocity {
+        val velocity = Force(sumForces(Direction.LEFT, Direction.RIGHT),
+                sumForces(Direction.UP, Direction.DOWN))
+                .toVelocity()
 
         forces.removeIf { it is TemporaryMonoForce }
+        return velocity
     }
 
     private fun sumForces(first: Direction, second: Direction): Value {

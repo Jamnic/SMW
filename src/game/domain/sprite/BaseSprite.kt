@@ -1,13 +1,14 @@
 package game.domain.sprite
 
-import game.unit.*
+import game.unit.Position
+import game.unit.Rect
+import game.unit.Size
 import game.unit.force.Forces
 import game.unit.force.MonoForce
 
 class BaseSprite(
         size: Size,
-        private val position: Position = Position(),
-        private val velocity: Velocity = Velocity()
+        private val position: Position = Position()
 ) : Sprite {
 
     private val forces: Forces = Forces()
@@ -15,10 +16,6 @@ class BaseSprite(
 
     override fun position(): Position {
         return position
-    }
-
-    override fun velocity(): Velocity {
-        return this.velocity
     }
 
     override fun addForce(force: MonoForce) {
@@ -40,7 +37,6 @@ class BaseSprite(
     }
 
     override fun tick() {
-        forces.calculateVelocity(velocity)
-        position.update(velocity)
+        position.update(forces.calculateVelocity())
     }
 }

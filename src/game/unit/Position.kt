@@ -40,8 +40,8 @@ class Position(
     }
 
     fun update(velocity: Velocity) {
-        this.x += velocity.x().evaluate()
-        this.y += velocity.y().evaluate()
+        this.x += velocity.x.evaluate()
+        this.y += velocity.y.evaluate()
     }
 
     operator fun plus(position: Position): Position {
