@@ -1,6 +1,6 @@
 package game.unit
 
-class Size(
+data class Size(
         val width: Int = 0,
         val height: Int = 0
 ) {
